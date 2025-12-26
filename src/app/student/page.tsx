@@ -21,7 +21,7 @@ const StudentPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-sky-100 via-white to-pink-100">
+    <div className="min-h-screen bg-gradient-to-br from-sky-100 via-white to-pink-100">
       <Flex
         justify="center"
         align="center"

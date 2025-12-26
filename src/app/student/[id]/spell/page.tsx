@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
-import { useSpeechRecognition } from "../../../../utils/speech";
+import { useSpeechRecognition } from "@/utils/speech";
 
 const { Title, Paragraph, Text } = Typography;
 

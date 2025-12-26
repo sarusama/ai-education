@@ -7,7 +7,7 @@
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
 import { useParams, useRouter } from "next/navigation";
-import { useSpeechRecognition } from "../../../../utils/speech";
+import { useSpeechRecognition } from "@/utils/speech";
 
 const subjects = ["啊", "波", "神", "么", "嘛", "马", "驴", "哦", "破", "去"];
 const { Title, Paragraph, Text } = Typography;

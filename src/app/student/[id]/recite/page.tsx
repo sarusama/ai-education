@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
 import { useParams, useRouter } from "next/navigation";
-import { useSpeechRecognition } from "../../../../utils/speech";
+import { useSpeechRecognition } from "@/utils/speech";
 
 const subjects = [
   {
