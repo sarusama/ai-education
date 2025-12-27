@@ -25,3 +25,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out # 部署 out 文件夹
+          force_orphan: true
