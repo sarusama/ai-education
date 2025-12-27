@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   },
   distDir: 'out',
   output: 'export',
+  basePath: '/ai-education',
 };
 
 export default nextConfig;
