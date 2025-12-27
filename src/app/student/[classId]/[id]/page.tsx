@@ -1,8 +1,8 @@
+"use client";
+
 /**
  * 登录成功页面
  */
-
-"use client";
 
 import { Button, Card, Flex, Typography } from "antd";
 import { useParams, useRouter } from "next/navigation";
@@ -12,20 +12,21 @@ const { Title, Paragraph, Text } = Typography;
 const StudentPage = () => {
   const params = useParams();
   const studentId = params?.id as string | undefined;
+  const classId = params?.classId as string | undefined;
 
   const router = useRouter();
 
   // 拼一拼
   const handleToSpell = () => {
-    router.push(`/student/${studentId}/spell`);
+    router.push(`/student/${classId}/${studentId}/spell`);
   };
   // 读一读
   const handleToRead = () => {
-    router.push(`/student/${studentId}/read`);
+    router.push(`/student/${classId}/${studentId}/read`);
   };
   // 背一背
   const handleToRecite = () => {
-    router.push(`/student/${studentId}/recite`);
+    router.push(`/student/${classId}/${studentId}/recite`);
   };
 
   return (
@@ -42,9 +43,10 @@ const StudentPage = () => {
           }}
         >
           <div className="flex flex-col items-center gap-2 pb-2">
-            <Title type="secondary">
+            <Title type="secondary">班级：{classId}</Title>
+            <Text type="secondary">
               {studentId ? `学号：${studentId}` : "欢迎小朋友"}
-            </Title>
+            </Text>
           </div>
 
           <div className="mb-6 rounded-xl bg-sky-50 px-4 py-3 text-center">
@@ -53,30 +55,39 @@ const StudentPage = () => {
             </Paragraph>
           </div>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
             <Button
               type="primary"
               size="large"
-              className="h-16 rounded-xl bg-linear-to-r from-amber-400 to-orange-400 border-none shadow-md"
+              className="h-28 sm:h-24 rounded-2xl bg-linear-to-r from-amber-400 to-orange-400 border-none shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 text-white font-bold text-2xl"
               onClick={handleToSpell}
             >
-              拼一拼
+              <span className="flex items-center justify-center gap-2">
+                <span className="text-3xl">🔤</span>
+                <span>拼一拼</span>
+              </span>
             </Button>
             <Button
               type="primary"
               size="large"
-              className="h-16 rounded-xl bg-linear-to-r from-sky-400 to-blue-500 border-none shadow-md"
+              className="h-28 sm:h-24 rounded-2xl bg-linear-to-r from-sky-400 to-blue-500 border-none shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 text-white font-bold text-2xl"
               onClick={handleToRead}
             >
-              读一读
+              <span className="flex items-center justify-center gap-2">
+                <span className="text-3xl">📖</span>
+                <span>读一读</span>
+              </span>
             </Button>
             <Button
               type="primary"
               size="large"
-              className="h-16 rounded-xl bg-linear-to-r from-green-400 to-emerald-500 border-none shadow-md"
+              className="h-28 sm:h-24 rounded-2xl bg-linear-to-r from-green-400 to-emerald-500 border-none shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 text-white font-bold text-2xl"
               onClick={handleToRecite}
             >
-              背一背
+              <span className="flex items-center justify-center gap-2">
+                <span className="text-3xl">📝</span>
+                <span>背一背</span>
+              </span>
             </Button>
           </div>
 

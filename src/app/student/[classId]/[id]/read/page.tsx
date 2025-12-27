@@ -1,8 +1,8 @@
+"use client";
+
 /**
  * 读一读
  */
-
-"use client";
 
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
@@ -106,17 +106,13 @@ const Read = () => {
                   type="primary"
                   size="large"
                   className="px-4"
-                  onClick={handleStart}
-                  disabled={!supported || listening}
+                  onMouseDown={handleStart}
+                  onMouseUp={handleStop}
+                  onTouchStart={handleStart}
+                  onTouchEnd={handleStop}
+                  disabled={!supported}
                 >
                   {listening ? "正在录音…" : "开始朗读"}
-                </Button>
-                <Button
-                  size="large"
-                  onClick={handleStop}
-                  disabled={!supported || !listening}
-                >
-                  停止
                 </Button>
                 <Button
                   size="large"
@@ -144,14 +140,14 @@ const Read = () => {
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
             <Text className="text-sky-700">
-              小提示：先按“开始朗读”，读完再点“停止”，然后进入下一题。
+              小提示：先按“开始朗读”，读完松开手指，然后进入下一题。
             </Text>
             <Button
               type="primary"
               size="large"
               className="px-6"
               onClick={handleSubmit}
-              disabled={listening}
+              disabled={listening || (isLast && !transcript)}
             >
               提交并返回
             </Button>

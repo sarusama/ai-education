@@ -15,9 +15,9 @@ const { Title, Paragraph, Text } = Typography;
 const StudentPage = () => {
   const router = useRouter();
 
-  const handleFinish = (values: { class?: string; studentId?: string }) => {
+  const handleFinish = (values: { classId?: string; studentId?: string }) => {
     const targetId = values?.studentId?.trim() || '';
-    router.push(`/student/${encodeURIComponent(targetId)}`);
+    router.push(`/student/${encodeURIComponent(values?.classId || '')}/${encodeURIComponent(targetId)}`);
   };
 
   return (
@@ -51,7 +51,7 @@ const StudentPage = () => {
 
             <Item
               label="班级"
-              name="class"
+              name="classId"
               rules={[{ required: true, message: '请填写你的班级哦~' }]}
             >
               <Input

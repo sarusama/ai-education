@@ -57,7 +57,7 @@ const Home = () => {
               >
                 <div className="flex flex-col items-center gap-1">
                   <span className="text-2xl mb-1">👨‍🎓</span>
-                  <span>学生端</span>
+                  <span>学生入口</span>
                   <Text className="text-xs opacity-90" style={{ color: 'white' }}>
                     开始学习测评
                   </Text>
@@ -76,7 +76,7 @@ const Home = () => {
               >
                 <div className="flex flex-col items-center gap-1">
                   <span className="text-2xl mb-1">👩‍🏫</span>
-                  <span>教师端</span>
+                  <span>教师入口</span>
                   <Text className="text-xs opacity-80" style={{ color: '#0ea5e9' }}>
                     管理教学系统
                   </Text>

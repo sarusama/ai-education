@@ -1,26 +1,31 @@
-/**
- * 背一背
- * 看图背诵全文
- */
-
 "use client";
 
+/**
+ * 拼一拼
+ */
+
 import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
-import { useParams, useRouter } from "next/navigation";
 import { useSpeechRecognition } from "@/utils/speech";
-
-const subjects = [
-  {
-    image: "/recite/subjects/image.png",
-    // hint: "看图背诵：锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。",
-  },
-];
 
 const { Title, Paragraph, Text } = Typography;
 
-const Recite = () => {
+type Subject = {
+  image: string;
+  text: string;
+};
+
+const subjects: Subject[] = [
+  { image: "/subject/subject01.png", text: "shui bei" },
+  { image: "/subject/subject02.png", text: "lian peng" },
+  { image: "/subject/subject03.png", text: "zhuo zi" },
+  { image: "/subject/subject04.png", text: "yi zi" },
+  { image: "/subject/subject05.png", text: "mao jin" },
+];
+
+const Spell = () => {
   const params = useParams();
   const router = useRouter();
   const studentId = params?.id as string | undefined;
@@ -83,7 +88,7 @@ const Recite = () => {
         >
           <div className="flex flex-col items-center gap-1 pb-4">
             <Title level={3} style={{ marginBottom: 0 }}>
-              背一背
+              拼一拼
             </Title>
             <Text type="secondary">
               {studentId ? `学号：${studentId}` : "小朋友，加油！"}
@@ -103,35 +108,31 @@ const Recite = () => {
             <div className="relative h-48 w-full overflow-hidden rounded-2xl bg-white shadow-inner">
               <Image
                 src={currentSubject.image}
-                alt="背诵图片"
+                alt={currentSubject.text}
                 fill
-                className="object-contain p-4"
+                className="object-contain p-6"
                 sizes="240px"
                 priority
               />
             </div>
 
             <div className="flex flex-col gap-3">
-              {/* <Paragraph className="text-lg font-semibold text-sky-700">
-                {currentSubject.hint}
-              </Paragraph> */}
+              <Paragraph className="text-lg font-semibold text-sky-700">
+                请大声读出：{currentSubject.text}
+              </Paragraph>
 
               <div className="flex flex-wrap gap-3">
                 <Button
                   type="primary"
                   size="large"
                   className="px-4"
-                  onClick={handleStart}
-                  disabled={!supported || listening}
+                  onMouseDown={handleStart}
+                  onMouseUp={handleStop}
+                  onTouchStart={handleStart}
+                  onTouchEnd={handleStop}
+                  disabled={!supported}
                 >
-                  {listening ? "正在录音…" : "开始背诵"}
-                </Button>
-                <Button
-                  size="large"
-                  onClick={handleStop}
-                  disabled={!supported || !listening}
-                >
-                  停止
+                  {listening ? "正在录音…" : "开始拼读"}
                 </Button>
                 <Button
                   size="large"
@@ -143,7 +144,7 @@ const Recite = () => {
               </div>
 
               <div className="rounded-xl border border-dashed border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800 shadow-inner">
-                <Text type="secondary">我的背诵（实时）：</Text>
+                <Text type="secondary">我的拼读（实时）：</Text>
                 <Paragraph style={{ marginBottom: 0 }}>
                   {interimTranscript || "等待录音…"}
                 </Paragraph>
@@ -159,14 +160,14 @@ const Recite = () => {
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
             <Text className="text-sky-700">
-              小提示：看图回忆全文，录完再点“停止”，然后下一题。
+              小提示：请按住“开始拼读”，然后进入下一题。
             </Text>
             <Button
               type="primary"
               size="large"
               className="px-6"
               onClick={handleSubmit}
-              disabled={listening}
+              disabled={listening || (isLast && !transcript)}
             >
               提交并返回
             </Button>
@@ -177,4 +178,4 @@ const Recite = () => {
   );
 };
 
-export default Recite;
+export default Spell;
