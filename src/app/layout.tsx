@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Watermark } from 'antd';
 import "./globals.css";
 
-declare const name: string;
+// declare const name: string;
 
 export const metadata: Metadata = {
   title: "AI赋能教学",
@@ -23,7 +23,7 @@ export default function RootLayout({
         className="antialiased w-screen h-screen"
       >
         <Watermark
-          content={name}
+          content='富春三小期末非纸质测评系统（模拟）'
           className="w-screen h-screen relative"
         >
           {children}

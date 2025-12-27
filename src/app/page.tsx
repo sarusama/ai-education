@@ -3,7 +3,7 @@
 import { Button, Card, Flex, Typography } from 'antd';
 import { useRouter } from 'next/navigation';
 
-declare const name: string;
+// declare const name: string;
 
 const { Title, Text } = Typography;
 
@@ -35,7 +35,8 @@ const Home = () => {
             {/* 标题区域 */}
             <div className="flex flex-col items-center gap-3">
               <Title level={2} style={{ marginBottom: 0, textAlign: 'center' }}>
-                {name}
+                {/* {name} */}
+                富春三小期末非纸质测评系统（模拟）
               </Title>
               <Text type="secondary" className="text-base">
                 请选择您的身份进入系统

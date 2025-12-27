@@ -7,7 +7,7 @@
 import { Button, Card, Flex, Form, Input, Typography } from 'antd';
 import { useRouter } from 'next/navigation';
 
-declare const name: string;
+// declare const name: string;
 
 const { Item } = Form;
 const { Title, Paragraph, Text } = Typography;
@@ -46,7 +46,8 @@ const StudentPage = () => {
             requiredMark={false}
           >
             <div className="mb-4 text-center text-base font-medium text-sky-600">
-              {name}
+              {/* {name} */}
+              富春三小期末非纸质测评系统（模拟）
             </div>
 
             <Item
