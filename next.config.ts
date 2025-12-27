@@ -7,8 +7,8 @@ const nextConfig: NextConfig = {
       name: '富春三小期末非纸质测评系统（模拟）',
     },
   },
-  distDir: 'build',
-  // output: 'export',
+  distDir: 'out',
+  output: 'export',
 };
 
 export default nextConfig;
