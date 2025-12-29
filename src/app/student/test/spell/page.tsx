@@ -1,21 +1,35 @@
 "use client";
 
 /**
- * 读一读
+ * 拼一拼
  */
 
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
-import { useParams, useRouter } from "next/navigation";
 import { useSpeechRecognition } from "@/utils/speech";
 
-const subjects = ["啊", "波", "神", "么", "嘛", "马", "驴", "哦", "破", "去"];
 const { Title, Paragraph, Text } = Typography;
 
-const Read = () => {
-  const params = useParams();
+type Subject = {
+  image: string;
+  text: string;
+};
+
+const subjects: Subject[] = [
+  { image: "/subject/subject01.png", text: "shui bei" },
+  { image: "/subject/subject02.png", text: "lian peng" },
+  { image: "/subject/subject03.png", text: "zhuo zi" },
+  { image: "/subject/subject04.png", text: "yi zi" },
+  { image: "/subject/subject05.png", text: "mao jin" },
+];
+
+const Spell = () => {
   const router = useRouter();
-  const studentId = params?.id as string | undefined;
+  const searchParams = useSearchParams();
+  const studentId = searchParams.get('id');
+  const classId = searchParams.get('classId');
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -75,7 +89,7 @@ const Read = () => {
         >
           <div className="flex flex-col items-center gap-1 pb-4">
             <Title level={3} style={{ marginBottom: 0 }}>
-              读一读
+              拼一拼
             </Title>
             <Text type="secondary">
               {studentId ? `学号：${studentId}` : "小朋友，加油！"}
@@ -92,13 +106,20 @@ const Read = () => {
           )}
 
           <div className="grid gap-4 md:grid-cols-[240px,1fr] items-center">
-            <div className="flex h-48 w-full items-center justify-center rounded-2xl bg-white text-6xl font-bold shadow-inner text-sky-700">
-              {currentSubject}
+            <div className="relative h-48 w-full overflow-hidden rounded-2xl bg-white shadow-inner">
+              <Image
+                src={currentSubject.image}
+                alt={currentSubject.text}
+                fill
+                className="object-contain p-6"
+                sizes="240px"
+                priority
+              />
             </div>
 
             <div className="flex flex-col gap-3">
               <Paragraph className="text-lg font-semibold text-sky-700">
-                请大声读出：{currentSubject}
+                请大声读出：{currentSubject.text}
               </Paragraph>
 
               <div className="flex flex-wrap gap-3">
@@ -112,7 +133,7 @@ const Read = () => {
                   onTouchEnd={handleStop}
                   disabled={!supported}
                 >
-                  {listening ? "正在录音…" : "开始朗读"}
+                  {listening ? "正在录音…" : "开始拼读"}
                 </Button>
                 <Button
                   size="large"
@@ -124,7 +145,7 @@ const Read = () => {
               </div>
 
               <div className="rounded-xl border border-dashed border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-800 shadow-inner">
-                <Text type="secondary">我的朗读（实时）：</Text>
+                <Text type="secondary">我的拼读（实时）：</Text>
                 <Paragraph style={{ marginBottom: 0 }}>
                   {interimTranscript || "等待录音…"}
                 </Paragraph>
@@ -140,7 +161,7 @@ const Read = () => {
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
             <Text className="text-sky-700">
-              小提示：先按“开始朗读”，读完松开手指，然后进入下一题。
+              小提示：请按住“开始拼读”，然后进入下一题。
             </Text>
             <Button
               type="primary"
@@ -158,4 +179,4 @@ const Read = () => {
   );
 };
 
-export default Read;
+export default Spell;

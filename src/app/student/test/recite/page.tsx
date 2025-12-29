@@ -8,7 +8,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useSpeechRecognition } from "@/utils/speech";
 
 const subjects = [
@@ -21,9 +21,10 @@ const subjects = [
 const { Title, Paragraph, Text } = Typography;
 
 const Recite = () => {
-  const params = useParams();
   const router = useRouter();
-  const studentId = params?.id as string | undefined;
+  const searchParams = useSearchParams();
+  const studentId = searchParams.get('id');
+  const classId = searchParams.get('classId');
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});

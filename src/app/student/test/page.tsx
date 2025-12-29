@@ -5,28 +5,28 @@
  */
 
 import { Button, Card, Flex, Typography } from "antd";
-import { useParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 const { Title, Paragraph, Text } = Typography;
 
 const StudentPage = () => {
-  const params = useParams();
-  const studentId = params?.id as string | undefined;
-  const classId = params?.classId as string | undefined;
+  const searchParams = useSearchParams();
+  const studentId = searchParams.get('id');
+  const classId = searchParams.get('classId');
 
   const router = useRouter();
 
   // 拼一拼
   const handleToSpell = () => {
-    router.push(`/student/${classId}/${studentId}/spell`);
+    router.push(`/student/test/spell?classId=${classId}&id=${studentId}`);
   };
   // 读一读
   const handleToRead = () => {
-    router.push(`/student/${classId}/${studentId}/read`);
+    router.push(`/student/test/read?classId=${classId}&id=${studentId}`);
   };
   // 背一背
   const handleToRecite = () => {
-    router.push(`/student/${classId}/${studentId}/recite`);
+    router.push(`/student/test/recite?classId=${classId}&id=${studentId}`);
   };
 
   return (
