@@ -17,7 +17,7 @@ const StudentPage = () => {
 
   const handleFinish = (values: { classId?: string; studentId?: string }) => {
     const targetId = values?.studentId?.trim() || '';
-    router.push(`/student/${encodeURIComponent(values?.classId || '')}/${encodeURIComponent(targetId)}`);
+    router.push(`/student/test?classId=${encodeURIComponent(values?.classId || '')}&id=${encodeURIComponent(targetId)}`);
   };
 
   return (
