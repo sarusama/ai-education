@@ -1,16 +1,13 @@
 "use client";
 
-/**
- * 登录成功页面
- */
-
 import { Button, Card, Flex, Typography } from "antd";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import useQuery from "@/hooks/use-search-params";
 
 const { Title, Paragraph, Text } = Typography;
 
 const StudentPage = () => {
-  const searchParams = useSearchParams();
+  const searchParams = useQuery();
   const studentId = searchParams.get('id');
   const classId = searchParams.get('classId');
 
