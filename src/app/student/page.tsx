@@ -6,6 +6,7 @@
 
 import { Button, Card, Flex, Form, Input, Typography } from 'antd';
 import { useRouter } from 'next/navigation';
+import { useUserInfoContext } from '@/contexts/userinfo';
 
 declare const name: string;
 
@@ -14,10 +15,12 @@ const { Title, Paragraph, Text } = Typography;
 
 const StudentPage = () => {
   const router = useRouter();
+  const userinfo = useUserInfoContext();
 
   const handleFinish = (values: { classId?: string; studentId?: string }) => {
-    const targetId = values?.studentId?.trim() || '';
-    router.push(`/student/test?classId=${encodeURIComponent(values?.classId || '')}&id=${encodeURIComponent(targetId)}`);
+    userinfo.setClassId(values.classId || '');
+    userinfo.setStudentId(values.studentId || '');
+    router.push('/student/test');
   };
 
   return (

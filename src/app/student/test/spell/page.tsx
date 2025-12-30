@@ -7,10 +7,10 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import useQuery from "@/hooks/use-search-params";
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
 import { useSpeechRecognition } from "@/utils/speech";
+import { useUserInfoContext } from "@/contexts/userinfo";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -29,9 +29,7 @@ const subjects: Subject[] = [
 
 const SpellContent = () => {
   const router = useRouter();
-  const searchParams = useQuery();
-  const studentId = searchParams.get('id');
-  const classId = searchParams.get('classId');
+  const userinfo = useUserInfoContext();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -79,7 +77,7 @@ const SpellContent = () => {
 
   const handleSubmit = () => {
     persistAnswer();
-    router.push(`/student/${studentId ?? ""}`);
+    router.push(`/student/test`);
   };
 
   return (
@@ -94,7 +92,7 @@ const SpellContent = () => {
               拼一拼
             </Title>
             <Text type="secondary">
-              {studentId ? `学号：${studentId}` : "小朋友，加油！"}
+              {userinfo.studentId ? `学号：${userinfo.studentId}` : "小朋友，加油！"}
             </Text>
             <Text className="text-sky-600">{`题目 ${currentIndex + 1} / ${
               subjects.length
@@ -170,7 +168,7 @@ const SpellContent = () => {
               size="large"
               className="px-6"
               onClick={handleSubmit}
-              disabled={listening || (isLast && !transcript)}
+              disabled={listening || (!isLast && !transcript)}
             >
               提交并返回
             </Button>

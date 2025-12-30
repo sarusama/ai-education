@@ -3,28 +3,25 @@
 import { Suspense } from "react";
 import { Button, Card, Flex, Typography } from "antd";
 import { useRouter } from "next/navigation";
-import useQuery from "@/hooks/use-search-params";
+import { useUserInfoContext } from "@/contexts/userinfo";
 
 const { Title, Paragraph, Text } = Typography;
 
 const StudentPageContent = () => {
-  const searchParams = useQuery();
-  const studentId = searchParams.get('id');
-  const classId = searchParams.get('classId');
-
+  const userinfo = useUserInfoContext();
   const router = useRouter();
 
   // 拼一拼
   const handleToSpell = () => {
-    router.push(`/student/test/spell?classId=${classId}&id=${studentId}`);
+    router.push(`/student/test/spell`);
   };
   // 读一读
   const handleToRead = () => {
-    router.push(`/student/test/read?classId=${classId}&id=${studentId}`);
+    router.push(`/student/test/read`);
   };
   // 背一背
   const handleToRecite = () => {
-    router.push(`/student/test/recite?classId=${classId}&id=${studentId}`);
+    router.push(`/student/test/recite`);
   };
 
   return (
@@ -41,9 +38,9 @@ const StudentPageContent = () => {
           }}
         >
           <div className="flex flex-col items-center gap-2 pb-2">
-            <Title type="secondary">班级：{classId}</Title>
+            <Title type="secondary">班级：{userinfo.classId}</Title>
             <Text type="secondary">
-              {studentId ? `学号：${studentId}` : "欢迎小朋友"}
+              {userinfo.studentId ? `学号：${userinfo.studentId}` : "欢迎小朋友"}
             </Text>
           </div>
 
