@@ -15,7 +15,7 @@ import { useUserInfoContext } from "@/contexts/userinfo";
 
 const subjects = [
   {
-    image: "/recite/subjects/image.png",
+    image: "/ai-education/recite/subjects/image.png",
     // hint: "看图背诵：锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。",
   },
 ];

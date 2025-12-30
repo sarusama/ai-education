@@ -20,11 +20,11 @@ type Subject = {
 };
 
 const subjects: Subject[] = [
-  { image: "/subject/subject01.png", text: "shui bei" },
-  { image: "/subject/subject02.png", text: "lian peng" },
-  { image: "/subject/subject03.png", text: "zhuo zi" },
-  { image: "/subject/subject04.png", text: "yi zi" },
-  { image: "/subject/subject05.png", text: "mao jin" },
+  { image: "/ai-education/subject/subject01.png", text: "shui bei" },
+  { image: "/ai-education/subject/subject02.png", text: "lian peng" },
+  { image: "/ai-education/subject/subject03.png", text: "zhuo zi" },
+  { image: "/ai-education/subject/subject04.png", text: "yi zi" },
+  { image: "/ai-education/subject/subject05.png", text: "mao jin" },
 ];
 
 const SpellContent = () => {
