@@ -5,7 +5,8 @@
  */
 
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import useQuery from "@/hooks/use-search-params";
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
 import { useSpeechRecognition } from "@/utils/speech";
@@ -27,7 +28,7 @@ const subjects: Subject[] = [
 
 const Spell = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParams = useQuery();
   const studentId = searchParams.get('id');
   const classId = searchParams.get('classId');
 

@@ -6,7 +6,8 @@
 
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import useQuery from "@/hooks/use-search-params";
 import { useSpeechRecognition } from "@/utils/speech";
 
 const subjects = ["啊", "波", "神", "么", "嘛", "马", "驴", "哦", "破", "去"];
@@ -14,7 +15,7 @@ const { Title, Paragraph, Text } = Typography;
 
 const Read = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParams = useQuery();
   const studentId = searchParams.get('id');
   const classId = searchParams.get('classId');
 
