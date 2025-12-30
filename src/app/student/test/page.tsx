@@ -1,12 +1,13 @@
 "use client";
 
+import { Suspense } from "react";
 import { Button, Card, Flex, Typography } from "antd";
 import { useRouter } from "next/navigation";
 import useQuery from "@/hooks/use-search-params";
 
 const { Title, Paragraph, Text } = Typography;
 
-const StudentPage = () => {
+const StudentPageContent = () => {
   const searchParams = useQuery();
   const studentId = searchParams.get('id');
   const classId = searchParams.get('classId');
@@ -96,6 +97,20 @@ const StudentPage = () => {
         </Card>
       </Flex>
     </div>
+  );
+};
+
+const StudentPage = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-linear-to-br from-sky-100 via-white to-pink-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-sky-600 text-lg">加载中...</div>
+        </div>
+      </div>
+    }>
+      <StudentPageContent />
+    </Suspense>
   );
 };
 

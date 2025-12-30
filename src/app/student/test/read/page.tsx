@@ -4,6 +4,7 @@
  * 读一读
  */
 
+import { Suspense } from "react";
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
 import { useRouter } from "next/navigation";
@@ -13,7 +14,7 @@ import { useSpeechRecognition } from "@/utils/speech";
 const subjects = ["啊", "波", "神", "么", "嘛", "马", "驴", "哦", "破", "去"];
 const { Title, Paragraph, Text } = Typography;
 
-const Read = () => {
+const ReadContent = () => {
   const router = useRouter();
   const searchParams = useQuery();
   const studentId = searchParams.get('id');
@@ -157,6 +158,20 @@ const Read = () => {
         </Card>
       </Flex>
     </div>
+  );
+};
+
+const Read = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-linear-to-br from-sky-100 via-white to-pink-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-sky-600 text-lg">加载中...</div>
+        </div>
+      </div>
+    }>
+      <ReadContent />
+    </Suspense>
   );
 };
 

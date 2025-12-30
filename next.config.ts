@@ -7,9 +7,10 @@ const nextConfig: NextConfig = {
       name: '富春三小期末非纸质测评系统（模拟）',
     },
   },
-  distDir: 'out',
+  distDir: 'build',
   // output: 'export',
   basePath: '/ai-education',
+  output: 'export',
 };
 
 export default nextConfig;
