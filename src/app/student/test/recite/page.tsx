@@ -5,6 +5,7 @@
  * 看图背诵全文
  */
 
+import { Suspense } from "react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Button, Card, Flex, Typography } from "antd";
@@ -21,7 +22,7 @@ const subjects = [
 
 const { Title, Paragraph, Text } = Typography;
 
-const Recite = () => {
+const ReciteContent = () => {
   const router = useRouter();
   const searchParams = useQuery();
   const studentId = searchParams.get('id');
@@ -172,6 +173,20 @@ const Recite = () => {
         </Card>
       </Flex>
     </div>
+  );
+};
+
+const Recite = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-linear-to-br from-sky-100 via-white to-pink-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-sky-600 text-lg">加载中...</div>
+        </div>
+      </div>
+    }>
+      <ReciteContent />
+    </Suspense>
   );
 };
 

@@ -1,5 +1,9 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+
 const useQuery = () => {
-  const searchParams = new URLSearchParams(window.location.search);
+  const searchParams = useSearchParams();
   return searchParams;
 };
 

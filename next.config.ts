@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     },
   },
   distDir: 'build',
-  // output: 'export',
+  output: 'export',
 };
 
 export default nextConfig;

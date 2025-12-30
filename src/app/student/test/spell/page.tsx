@@ -4,6 +4,7 @@
  * 拼一拼
  */
 
+import { Suspense } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useQuery from "@/hooks/use-search-params";
@@ -26,7 +27,7 @@ const subjects: Subject[] = [
   { image: "/subject/subject05.png", text: "mao jin" },
 ];
 
-const Spell = () => {
+const SpellContent = () => {
   const router = useRouter();
   const searchParams = useQuery();
   const studentId = searchParams.get('id');
@@ -177,6 +178,20 @@ const Spell = () => {
         </Card>
       </Flex>
     </div>
+  );
+};
+
+const Spell = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-linear-to-br from-sky-100 via-white to-pink-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-sky-600 text-lg">加载中...</div>
+        </div>
+      </div>
+    }>
+      <SpellContent />
+    </Suspense>
   );
 };
 
